@@ -13,4 +13,11 @@ after_success:
   - docker build -t devvyky/multi-client ./client
   - docker build -t devvyky/multi-nginx ./nginx
   - docker build -t devvyky/multi-server ./server
-  - docker build -t devvyky/multi-worker ./worker
+  - docker build -t devvyky/multi-worker ./
+  # Login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take these images and push them to docker hub
+  - docker push devvyky/multi-client
+  - docker push devvyky/multi-nginx
+  - docker push devvyky/multi-server
+  - docker push devvyky/multi-worker
